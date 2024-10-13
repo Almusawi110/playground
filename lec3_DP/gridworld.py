@@ -4,9 +4,11 @@ import numpy as np
 class GridWorld():
     def __init__(self, env_size):
         self.env_size = env_size
-        # TODO: Change the location of the terminal state and check how the optimal policy changes
-        # TODO: Add more than one terminal state (requires more changes in the code)
+      
         self.terminal_state = (4, 4)
+
+        # Gray state locations (non-favorable states)
+        self.gray_states = [(0,4),(1, 2), (3, 0)]
 
         # Define the transition probabilities and rewards
         self.actions = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # Right, Left, Down, Up
@@ -14,8 +16,9 @@ class GridWorld():
 
         # Assign a vector of rewards for each of the states
         self.reward = np.ones((self.env_size, self.env_size))*-1
-        self.reward[self.terminal_state] = 0
-
+        self.reward[self.terminal_state] = 10
+        for state in self.gray_states:
+            self.reward[state] = -5
     '''@brief Returns the next state given the chosen action and current state
     '''
     def step(self, action_index, i, j):

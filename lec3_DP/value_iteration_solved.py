@@ -3,6 +3,7 @@
 import numpy as np
 from gridworld import GridWorld
 from value_iteration_agent import Agent
+from gridworld_visualization import draw_gridworld  # Import the visualization function
 
 def main():
     ENV_SIZE = 5
@@ -36,5 +37,8 @@ def main():
     agent.update_greedy_policy()
     agent.print_policy()
 
+# Visualize the final greedy policy using the graphic design
+    policy = agent.get_policy()
+    draw_gridworld(policy)  # Visualize the policy with arrows
 if __name__=="__main__":
     main()
